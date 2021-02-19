@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head >
+<meta charset="utf-8" >
+<title>Project 02</title>
+	<link rel="stylesheet" type="text/css" href="p2.css">
+</head>
+<body > 
+<div  class="board">
+  <h2>MEMORY GAME: Remaining Time: <span id="time">01:00</span>
+    <input align="absmiddle"  type="button" value="Start Game" onClick="startgame()">
+  </h2>
+  <img src="img/back.jpg" onclick="imgOpen(this, 0)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 1)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 2)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 3)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 4)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 5)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 6)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 7)">	
+    <img src="img/back.jpg" onclick="imgOpen(this, 8)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 9)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 10)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 11)">
+	<img src="img/back.jpg" onclick="imgOpen(this, 12)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 13)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 14)">
+    <img src="img/back.jpg" onclick="imgOpen(this, 15)">
+</div>
+	
+	
+				
+<script type="text/javascript">
+		images = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg'];
+		click = 0;
+		firstImg = '';
+		firstElem = null;
+		timer = null ;
+		timercounter = 60;
+		hiddencounter = 0;
+	 	
+				function shuffle(){
+							for(i=0; i<images.length; i++){
+								ramdom = Math.floor(Math.random()*15);
+								temp = images[i];
+								images[i] = images[ramdom];
+								images[ramdom]=temp;}
+								  console.log(images);
+									   }
+			
+				function imgOpen(elem, n){
+								if( click == 0 && firstElem != elem){
+										elem.src = 'img/'+images[n];
+										click++;
+										firstImg = images[n];
+										firstElem = elem;  }
+								else {  elem.src = 'img/'+images[n];
+									  	setTimeout(function(){ if(firstImg == images[n] && firstElem != elem){ elem.style.visibility = "hidden";firstElem.style.visibility ="hidden";
+										hiddencounter+=2;
+										if(hiddencounter==16){
+											clearInterval(timer);
+											wtime=60;
+											s=wtime-timercounter;
+											alert("You won in "+s  );
+											
+											
+										}												}
+										else {elem.src = "img/back.jpg";firstElem.src = "img/back.jpg"} click=0;},1000); }
+				}
+		function startgame(){
+			Element
+			imgs = document.getElementsByTagName('img');
+			for(i=0; i<imgs.length; i++){ imgs[i].style.visibility ="visible";
+			imgs[i].src = "img/back.jpg";}
+				click=0;
+				shuffle();
+			timer = null ;
+			hiddencounter = 0;
+			timercounter =60;
+			timer = setInterval(function(){ 
+				
+				if(timercounter == 0){
+					clearInterval(timer);
+					for(i=0; i<imgs.length; i++){ 
+						imgs[i].style.visibility ="hidden";
+								}
+			alert("You lost !");
+				}
+				else{
+					timercounter--;
+					
+					document.getElementById("time").innerHTML = (timercounter<10)?('00:0'+timercounter) : ("00:"+timercounter); 
+					///document.getElementById("time").innerHTML = "00:"+timercounter;
+				}
+			}, 1000);
+			
+			
+		}
+		
+	</script>
+</body>
+</html>
